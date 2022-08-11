@@ -6,13 +6,13 @@ This function estimates the best fit for an evolutionary parameter (α, λ, or g
 
 ## Usage
 ```
-fitEvolPar(tre, dat, mod=c("OU", "lambda","EB"))
+fitEvolPar(dat, tre, mod=c("OU", "lambda","EB"))
 ```
 
 ## Arguments
-`tre` &nbsp; &nbsp; &nbsp; an ultrametric phylogenetic tree (object of class "`phylo`")
-
 `dat` &nbsp; &nbsp; &nbsp; a data frame containing the two variables (predictive and response) to include in a PGLS analysis
+
+`tre` &nbsp; &nbsp; &nbsp; an ultrametric phylogenetic tree (object of class "`phylo`")
 
 `mod` &nbsp; &nbsp; &nbsp; the phylogenetic correlation structure (covariance matrix) for the evolutionary model to estimate the main parameter of
 
@@ -60,10 +60,10 @@ dat<-cbind.data.frame(anole.data$SVL, anole.data$HL)
 colnames(dat)<-c("SVL", "HL"); rownames(dat)<-rownames(anole.data)
 
 # Estimate individual parameter for a lambda model
-fitEvolPar(anoletree, dat, "lambda")
+spp<-rownames(anole.data)
+fitEvolPar(dat, anoletree, "lambda")
 
 # Use in a 'gls' object with an OU model
-spp<-rownames(anole.data)
-reg<-gls(HL~SVL, anole.data, correlation=corMartins(fitEvolPar(anoletree, dat, "OU"), phy = anoletree, fixed = TRUE, form=~spp))
+reg<-gls(HL~SVL, anole.data, correlation=corMartins(fitEvolPar(dat, anoletree, "OU"), phy = anoletree, fixed = TRUE, form=~spp))
 summary(reg)
 ```
