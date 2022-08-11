@@ -9,6 +9,7 @@ fitEvolPar<-function(dat,tre,mod) {
   }
   dat<-ReorderData(tre,dat)
   spp<<-rownames(dat)
+  Wcv<<-diag(vcv.phylo(tre))
   colnames(dat)<-c("x","y")
   switch (mod, 
     OU = {
@@ -16,8 +17,12 @@ fitEvolPar<-function(dat,tre,mod) {
       fit <- list()
       for (i in seq_along(alpha)) {
         cor <- corMartins(alpha[i], phy = tre, fixed = TRUE, form=~spp)
-        fit[[i]] <- gls(y~x, correlation = cor, data=dat, na.action=na.exclude, method = "ML")
+        if (is.ultrametric(tre)==TRUE) {
+          fit[[i]] <- gls(y~x, correlation = cor, data=dat, na.action=na.exclude, method = "ML")
+        } else {
+          fit[[i]] <- gls(y~x, correlation = cor, data=dat, weights=varFixed(~Wcv), na.action=na.exclude, method = "ML")
         }
+      }
       print((which.max(sapply(fit, logLik))-1)*0.1)
     },
     lambda = {
@@ -25,8 +30,12 @@ fitEvolPar<-function(dat,tre,mod) {
       fit <- list()
       for (i in seq_along(lambda)) {
         cor <- corPagel(lambda[i], phy = tre, fixed = TRUE, form=~spp)
+        if (is.ultrametric(tre)==TRUE) {
         fit[[i]] <- gls(y~x, correlation = cor, data=dat, na.action=na.exclude, method = "ML")
+        } else {
+        fit[[i]] <- gls(y~x, correlation = cor, data=dat, weights=varFixed(~Wcv), na.action=na.exclude, method = "ML")
         }
+      }
       print((which.max(sapply(fit, logLik))-1)*0.1)
     },
     EB = {
@@ -34,7 +43,11 @@ fitEvolPar<-function(dat,tre,mod) {
       fit <- list()
       for (i in seq_along(g)) {
         cor <- corBlomberg(g[i], phy = tre, fixed = TRUE, form=~spp)
-        fit[[i]] <- gls(y~x, correlation = cor, data=dat, na.action=na.exclude, method = "ML")
+        if (is.ultrametric(tre)==TRUE) {
+          fit[[i]] <- gls(y~x, correlation = cor, data=dat, na.action=na.exclude, method = "ML")
+          } else {
+          fit[[i]] <- gls(y~x, correlation = cor, data=dat, weights=varFixed(~Wcv), na.action=na.exclude, method = "ML")
+          }
         }
       print(which.max(sapply(fit, logLik))*0.1)
     },
