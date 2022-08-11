@@ -8,7 +8,7 @@ fitEvolPar<-function(dat,tre,mod) {
     stop("data frame contains more than two columns")
   }
   dat<-ReorderData(tre,dat)
-  spp<-rownames(dat)
+  spp<<-rownames(dat)
   colnames(dat)<-c("x","y")
   switch (mod, 
     OU = {
