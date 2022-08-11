@@ -60,10 +60,10 @@ dat<-cbind.data.frame(anole.data$SVL, anole.data$HL)
 colnames(dat)<-c("SVL", "HL"); rownames(dat)<-rownames(anole.data)
 
 # Estimate individual parameter for a lambda model
-fitEvolPar(anole.tree, dat, "lambda")
+fitEvolPar(anoletree, dat, "lambda")
 
 # Use in a 'gls' object with an OU model
 spp<-rownames(anole.data)
-reg<-gls(HL~SVL, anole.data, correlation=corMartins(fitEvolPar(anole.tree, dat, "OU"), phy = anoletree, fixed = TRUE, form=~spp))
+reg<-gls(HL~SVL, anole.data, correlation=corMartins(fitEvolPar(anoletree, dat, "OU"), phy = anoletree, fixed = TRUE, form=~spp))
 summary(reg)
 ```
