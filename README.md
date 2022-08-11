@@ -47,6 +47,7 @@ Martins, E. P. and Hansen, T. F. (1997) Phylogenies and the comparative method: 
 
 ## Examples
 ```
+library(nlme)
 library(ape)
 library(evobiR)
 library(phytools)
