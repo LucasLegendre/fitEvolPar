@@ -12,7 +12,7 @@ fitEvolPar(dat, tre, mod=c("OU", "lambda","EB"))
 ## Arguments
 `dat` &nbsp; &nbsp; &nbsp; a data frame containing the two variables (predictive and response) to include in a PGLS analysis
 
-`tre` &nbsp; &nbsp; &nbsp; a phylogenetic tree (object of class "`phylo`"); `tre`needs not be ultrametric
+`tre` &nbsp; &nbsp; &nbsp; a phylogenetic tree (object of class "`phylo`"); `tre` needs not be ultrametric
 
 `mod` &nbsp; &nbsp; &nbsp; the phylogenetic correlation structure (covariance matrix) for the evolutionary model to estimate the main parameter of
 
