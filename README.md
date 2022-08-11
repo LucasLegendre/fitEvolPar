@@ -23,6 +23,8 @@ Function will stop if the data contains missing values and/or if the tips of the
 
 Correlations structures defined by the user with `mod` can be: `"OU"`(Ornstein-Uhlenbeck – Martins and Hansen, 1997; Butler and King, 2004), `"lambda"` (Brownian Motion with a maximum likelihood estimate of Pagel's λ – Freckleton et al., 2002), or `"EB"` (Early Burst – Blomberg et al., 2003). PGLS models are fitted using `gls` in `nlme` with correlation structures from `ape` (see `?corClasses`).
 
+Row names of `dat` need to be assigned to an object `spp` for the `form` argument of `gls`.
+
 ## Value
 A parameter estimate for the model of choice (α for `"OU"`, Pagel's λ for `"lambda"`, or g for `"EB"`). Value is comprised between 0 and 1 (0.1 and 1 for g), with one significant figure.
 
