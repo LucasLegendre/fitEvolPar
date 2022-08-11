@@ -1,4 +1,5 @@
 fitEvolPar<-function(dat,tre,mod) {
+  require(nlme)
   require(ape)
   require(evobiR)
   if (identical(setdiff(tre$tip.label, rownames(dat)), character(0))==FALSE) {
