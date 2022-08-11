@@ -17,6 +17,8 @@ fitEvolPar(tre, dat, mod=c("OU", "lambda","EB"))
 `mod` &nbsp; &nbsp; &nbsp; the phylogenetic correlation structure (covariance matrix) for the evolutionary model to estimate the main parameter of
 
 ## Details
+This function is designed to provide the best estimate of the parameter of choice if `optim` fails to return its value when compiling it in a `gls` object. In such a case, the value for it needs to be fixed (`fixed = TRUE`), which requires an input for the parameter's best fit.
+
 Function will stop if the data contains missing values and/or if the tips of the tree do not match the row names in the data frame. Data frame `dat` needs to have two columns: the predictive variable (x) on the left, and the response one (y) on the right.
 
 Correlations structures defined by the user with `mod` can be: `"OU"`(Ornstein-Uhlenbeck – Martins and Hansen, 1997; Butler and King, 2004), `"lambda"` (Brownian Motion with a maximum likelihood estimate of Pagel's λ – Freckleton et al., 2002), or `"EB"` (Early Burst – Blomberg et al., 2003). PGLS models are fitted using `gls` in `nlme` with correlation structures from `ape` (see `?corClasses`).
