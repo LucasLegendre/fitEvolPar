@@ -14,7 +14,7 @@ fitEvolPar(dat, tre, mod=c("OU", "lambda","EB"))
 
 `tre` &nbsp; &nbsp; &nbsp; a phylogenetic tree (object of class "`phylo`"); `tre` needs not be ultrametric
 
-`mod` &nbsp; &nbsp; &nbsp; the phylogenetic correlation structure (covariance matrix) for the evolutionary model to estimate the main parameter of
+`mod` &nbsp; &nbsp; &nbsp; the phylogenetic correlation structure (covariance matrix) for the evolutionary model of the PGLS
 
 ## Details
 This function is designed to provide the best estimate of the parameter of choice if `optim` fails to return its value when compiling it in a `gls` object. In such a case, the value for it needs to be fixed (`fixed = TRUE`), which requires an input for the parameter's best fit.
